@@ -13,19 +13,38 @@ import javax.swing.ImageIcon;
 import javax.imageio.*;
 import java.awt.image.BufferedImage;
 import java.net.URL;
+import java.net.MalformedURLException;
+import java.io.IOException;
+import java.io.File;
 
 public class GIF extends JPanel {
 
     private int x = 0;
     private int y = 0;
+    private int x0=0;
+    private int y0=0;
     private URL url;
+    private URL url2;
     private BufferedImage bi;
-    public GIF()
+    private BufferedImage bi2;
+    public GIF() throws IOException
     {
-        url= new URL("http://wallpapercave.com/wp/8cEpZrx.jpg");
-        bi=ImageIO.read(url);
+        try
+        {
+            //url= new URL("http://wallpapercave.com/wp/8cEpZrx.jpg");
+            url= new URL("http://www.deepcutstudio.com/wp-content/uploads/2016/01/x-wing-miniatures-play-mat-deep-space-3-600x600.jpg");
+            url2=new URL("file: trial.jpeg");
+            bi=ImageIO.read(url);
+            bi2=ImageIO.read(new File("trial.jpg"));
+        }
+        catch(MalformedURLException e)
+        {
+            e.printStackTrace();
+        }
+        
     }
     
+    //method was originally derived from stack exchange blog post 
     private void move() {
         Random rn=new Random();
         if (rn.nextInt(2)==0)
@@ -63,19 +82,22 @@ public class GIF extends JPanel {
         }    
        
     }
-
+    
     public void paint(Graphics g) {
         super.paint(g);
         Graphics2D g2 = (Graphics2D) g;
+        
+        //the following line was taken from a blog post on stack exchange
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
         
-        g2.drawImage(bi,x,y,null);
-        g2.fillOval(x, y, 30, 30);
+        g2.drawImage(bi,x0,y0,null);
+        g2.drawImage(bi2,x,y,null);
+        //g2.fillOval(x, y, 30, 30);
         //g2.setBackground(Color.RED);
         
       }
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, IOException{
         JFrame frame = new JFrame("Space");
         GIF gif = new GIF();
         frame.add(gif);
