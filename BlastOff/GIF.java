@@ -31,11 +31,14 @@ public class GIF extends JPanel {
     {
         try
         {
+           
             //url= new URL("http://wallpapercave.com/wp/8cEpZrx.jpg");
-            url= new URL("http://www.deepcutstudio.com/wp-content/uploads/2016/01/x-wing-miniatures-play-mat-deep-space-3-600x600.jpg");
+            //url= new URL("http://www.deepcutstudio.com/wp-content/uploads/2016/01/x-wing-miniatures-play-mat-deep-space-3-600x600.jpg");
+            url=new URL("http://c.dryicons.com/files/graphics_previews/space.jpg");
             url2=new URL("file: trial.jpeg");
             bi=ImageIO.read(url);
-            bi2=ImageIO.read(new File("trial.jpg"));
+            //bi=ImageIO.read(new File("background.jpeg"));
+            bi2=ImageIO.read(new File("sch.jpg"));
         }
         catch(MalformedURLException e)
         {
